@@ -28,6 +28,9 @@ WHERE id IN (
     WHERE YEAR(start) = 2023
 );
 ```
+![Q1](https://github.com/user-attachments/assets/d74a0108-e915-4e14-abf9-0de1415fc8c7)
+
+
 **2. Retrieve details of patients treated in 2023 who had allergies**
 ```sql
 SELECT *
@@ -56,6 +59,9 @@ FROM (
 INNER JOIN allergies
     ON allergies.patient = patients_2023.id;
 ```
+![Q2](https://github.com/user-attachments/assets/ebdc4476-6fa4-432b-987d-b18cc9387dc2)
+
+
 **3. Extract list of procedures carried out for each patient treated in 2023 with a running count per patient**
 ```sql
 SELECT 
@@ -77,6 +83,9 @@ INNER JOIN patients AS p
 WHERE YEAR(pr.start) = 2023
 ORDER BY Patient_Name, pr.start;
 ```
+![Q3](https://github.com/user-attachments/assets/aec8003f-21d4-4ada-8284-b4643155bcb3)
+
+
 **4. Highlight latest immunisation(s) given to each patient**
 ```sql
 SELECT  
@@ -92,6 +101,9 @@ INNER JOIN (
     ON i1.patient = i2.patient AND i1.date = i2.last_immunization_date
 ORDER BY i1.patient;
 ```
+![Q4](https://github.com/user-attachments/assets/b0644fd4-44a5-4a5f-947c-512abcdd8085)
+
+
 _A patient with the ID '59a7188a-2c62-2a19-e660-0dcfd7b7471f' was admitted. The following queries retrieve relevant clinical information about the patient, including medications, allergies, chronic conditions._
 
 **5. List all medications prescribed during the patient’s most recent encounter**
@@ -106,12 +118,17 @@ WHERE encounter = (
     ORDER BY start DESC
 );
 ```
+![Q5](https://github.com/user-attachments/assets/3f3a56ac-cf38-467d-a21f-f3e59de02614)
+
+
 **6. List all recorded allergies for a specific patient**
 ```sql
 SELECT *
 FROM allergies
 WHERE patient = '59a7188a-2c62-2a19-e660-0dcfd7b7471f';
 ```
+_The patient had no allergy record_
+
 **7. List the chronic conditions (excluding findings) of this specific patient**
 ```sql
 SELECT 
@@ -121,6 +138,7 @@ WHERE patient = '59a7188a-2c62-2a19-e660-0dcfd7b7471f'
     AND stop IS NULL
     AND description NOT LIKE '%finding%';
 ```
+![Q7](https://github.com/user-attachments/assets/07dd9c06-6c85-4d56-ba08-ed4204ca9dfd)
 
 
 
